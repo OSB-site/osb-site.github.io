@@ -5,8 +5,8 @@
   <title>Онлай заметки "Бинарность"</title>
 </head>
 <body>
-  <h3>Введите число:</h3>
-  <input type="number" id="numInput" placeholder="Введите число" />
+  <h3>Test:</h3>
+  <input type="number" id="numInput" placeholder="test1" />
   <button id="saveBtn">Сохранить</button>
   <p id="message"></p>
 
@@ -21,20 +21,20 @@
     button.addEventListener('click', () => {
       const value = input.value.trim();
       if (value === '') {
-        message.textContent = 'Введите число!';
+        message.textContent = 'test1!';
         return;
       }
       const number = Number(value);
       if (isNaN(number)) {
-        message.textContent = 'Это не число!';
+        message.textContent = 'test2!';
         return;
       }
       if (savedNumbers.includes(number)) {
-        message.textContent = `Число ${number} уже было введено.`;
+        message.textContent = `test3.`;
       } else {
         savedNumbers.push(number);
         localStorage.setItem('savedNumbers', JSON.stringify(savedNumbers));
-        message.textContent = `Число ${number} сохранено!`;
+        message.textContent = `test${number}!`;
       }
       input.value = '';
     });
