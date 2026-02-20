@@ -1,44 +1,59 @@
 <!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8" />
-  <title>OSBinary</title>
-  <link rel="icon" href="img/modicon.png" type="image/png">
-</head>
-<body>
-  <h1>OSBinary</h1>
-  <input type="number" id="numInput" placeholder="test1" />
-  <button id="saveBtn">Сохранить</button>
-  <p id="message"></p>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
+    <title>Log in</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/all.min.css" />
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <main class="py-5">
+      <section class="py-5">
+        <div class="container">
+          <div
+            id="loginBox"
+            class="boxContainer text-center p-3 p-md-5 rounded-2"
+          >
+            <h1 class="my-5">Smart Login System</h1>
+            <div class="inputsForm">
+              <input
+                type="email"
+                id="loginEmail"
+                class="form-control"
+                placeholder="Enter your email"
+                required
+              />
+              <input
+                type="password"
+                id="loginPassword"
+                class="form-control mt-3"
+                placeholder="Enter your password"
+                required
+              />
+              <button id="loginBtn" class="btn btn-main my-4 w-100">
+                Log in
+              </button>
+              <div class="signupText d-flex justify-content-center gap-2 mt-1">
+                <p>Don’t have an account?</p>
+                <a class="text-decoration-none" id="signupAnchor">Sign up</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
 
-  <script>
-    const input = document.getElementById('numInput');
-    const button = document.getElementById('saveBtn');
-    const message = document.getElementById('message');
-
-    // Загружаем массив чисел из localStorage или создаём новый
-    let savedNumbers = JSON.parse(localStorage.getItem('savedNumbers')) || [];
-
-    button.addEventListener('click', () => {
-      const value = input.value.trim();
-      if (value === '') {
-        message.textContent = 'test1!';
-        return;
-      }
-      const number = Number(value);
-      if (isNaN(number)) {
-        message.textContent = 'test2!';
-        return;
-      }
-      if (savedNumbers.includes(number)) {
-        message.textContent = `test3.`;
-      } else {
-        savedNumbers.push(number);
-        localStorage.setItem('savedNumbers', JSON.stringify(savedNumbers));
-        message.textContent = `test${number}!`;
-      }
-      input.value = '';
-    });
-  </script>
-</body>
+    <script src="./js/bootstrap.bundle.js"></script>
+    <script src="./js/sweetalert.min.js"></script>
+    <script src="./js/main.js"></script>
+  </body>
 </html>
