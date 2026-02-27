@@ -1,48 +1,48 @@
-let loginEmailInput = document.getElementById("loginEmail");
-let loginPasswordInput = document.getElementById("loginPassword");
-let loginBtn = document.getElementById("loginBtn");
-let signupAnchor = document.getElementById("signupAnchor");
-
 let users = [];
-
 if (localStorage.getItem("users") != null) {
-  users = JSON.parse(localStorage.getItem("users"));
+    users = JSON.parse(localStorage.getItem("users"));
 }
 
-function signIn() {
-  let loginEmail = loginEmailInput.value;
-  let loginPassword = loginPasswordInput.value;
+let notepad = document.getElementById('notepad');
+let logOutBtn = document.getElementById("logOutBtn");
+let Download = document.getElementById("Download");
+let userName = localStorage.getItem("userName");
 
-  if (loginEmailInput.value === "" || loginPasswordInput.value === "") {
-    swal({
-      text: "Please fill in all fields",
-    });
-    return;
-  }
 
-  if (isCorrectEmailAndPassword(loginEmail, loginPassword)) {
-    window.location.href = "home.html";
-  } else {
-    swal({
-      text: "Incorrect email or password",
-    });
-  }
-}
-
-function isCorrectEmailAndPassword(email, password) {
-  for (let i = 0; i < users.length; i++) {
-    if (users[i].email === email && users[i].password === password) {
-      localStorage.setItem("userName", users[i].name);
-      return true;
+if (userName) {
+    for (let i = 0; i < users.length; i++) {
+        if (users[i].name === userName && users[i].notepad) {
+            notepad.value = users[i].notepad;
+            break; 
+        }
     }
-  }
-  return false;
 }
 
-loginBtn.addEventListener("click", function () {
-  signIn();
+function save() {
+    localStorage.setItem('notepad', notepad.value);
+    for (let i = 0; i < users.length; i++) {
+        if (users[i].name === userName) {
+            users[i].notepad = notepad.value;
+            break;
+        }
+    }
+    localStorage.setItem("users", JSON.stringify(users));
+}
+
+notepad.addEventListener('input', save);
+setInterval(save, 500);
+window.addEventListener('beforeunload', save);
+
+logOutBtn.addEventListener("click", function () {
+    window.location.href = "login.html";
 });
 
-signupAnchor.addEventListener("click", function () {
-  window.location.href = "signup.html";
+Download.addEventListener("click", function () {
+    const text = notepad.value;
+    const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `заметки_${userName}.txt`;
+    link.click();
 });
+
