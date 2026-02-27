@@ -34,7 +34,7 @@ setInterval(save, 500);
 window.addEventListener('beforeunload', save);
 
 logOutBtn.addEventListener("click", function () {
-    window.location.href = "login.html";
+    window.location.href = "index.html";
 });
 
 Download.addEventListener("click", function () {
